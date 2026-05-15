@@ -37,7 +37,16 @@ TokenProtectionMax(6)
 
 Type = 2  (Protected)
 Signer = 6  (WinTcb)
+Level = 0x62
 */
+
+/*
+Level = (Signer << 4) | (Audit << 3) | Type
+Type   : 3 bits (0=None, 1=ProtectedLight, 2=Protected)
+Audit  : 1 bit  (usually 0)
+Signer : 4 bits (PS_PROTECTED_SIGNER)
+*/
+
 
 typedef struct _PS_PROTECTION
 {
@@ -67,6 +76,7 @@ static const WCHAR* ProtectedSignerNames[] =
 };
 
 // https://www.alex-ionescu.com/the-evolution-of-protected-processes-pass-the-hash-mitigations-in-windows-8-1/
+
 typedef enum _PS_PROTECTED_SIGNER : UCHAR
 {
     PsProtectedSignerNone = 0,
